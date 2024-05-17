@@ -5,9 +5,13 @@
   "projects": {
     "planetary-fall": {
       "projectType": "application",
+      "i18n": {
+        "sourceLocale": "pt"
+      },
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "displayBlock": true
         }
       },
       "root": "",
@@ -32,10 +36,13 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [ ]
           },
           "configurations": {
             "production": {
+              "localize": true,
+              "i18nMissingTranslation": "error",
+              "i18nDuplicateTranslation": "error",
               "budgets": [
                 {
                   "type": "initial",
@@ -56,7 +63,13 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -76,7 +89,9 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "planetary-fall:build"
+            "browserTarget": "planetary-fall:build",
+            "format": "xlf2",
+            "outputPath": "src/locales"
           }
         },
         "test": {
@@ -95,7 +110,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [ ]
           }
         }
       }

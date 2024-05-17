@@ -1,0 +1,16 @@
+@function calcGridColWidth($col-span, $total-cols) {
+
+  $single-col-width: calc(100% - ($total-cols - 1) * $gutter-horizontal) / $total-cols;
+
+  /* bellow, `$single-col-width` actually is replaced by declaration above but with the variable values
+   * already replaced by their declared values as well. So don't think that `$single-col-width` is the
+   * evaluated/computed value of the expression because it's not. */
+  $joined-col-width: calc($single-col-width * $col-span);
+  $col-extra-width: $gutter-horizontal * ($col-span - 1);
+
+  /* in the final compiled css this expression will be something like: calc(calc(calc(100% - (4 - 1) * 6rem) / 4 * 2) + 6rem) */
+  @return calc($joined-col-width + $col-extra-width);
+
+  // the same calculation is bellow but with everything together
+  // @return calc(((100% - ($total-cols - 1) * $gutter-horizontal) / $total-cols) * $col-span + ($gutter-horizontal * ($col-span - 1)));
+}
