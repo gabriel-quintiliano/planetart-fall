@@ -4,10 +4,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
+import { HeaderComponent } from './components/header/header.component';
+import { HomeComponent } from './components/home/home.component';
+import { HistoryComponent } from './components/history/history.component';
+import { DownloadComponent } from './components/download/download.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    HomeComponent,
+    HistoryComponent,
+    DownloadComponent
   ],
   imports: [
     BrowserModule,
