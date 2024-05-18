@@ -1,13 +1,16 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EmbeddedViewRef, Host, HostBinding, HostListener, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EmbeddedViewRef, Host, HostBinding, HostListener, Input, OnInit, Renderer2, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 
 @Component({
   selector: 'app-news-ticker',
   templateUrl: './news-ticker.component.html',
   styleUrls: ['./news-ticker.component.scss']
 })
-export class NewsTickerComponent implements AfterViewInit, OnInit {
-  @Input('gap') gapInRem: number = 2;
-  @Input('speed') animationDurInMs: number = 2000;
+export class NewsTickerComponent implements AfterViewInit {
+  /* this.gap and this.animationDuration have its values bound to their corresponding
+   * css custom properties via @HostBinding and their value can also be set from
+   * "outside" the component via @Input. These two also have default values (important) */
+  @Input() @HostBinding('style.--_gap') gap: string = '2rem';
+  @Input() @HostBinding('style.--_animation-duration') animationDuration: string = '2000ms';
   @Input({ required: true }) newsText!: string;
   
   // so there is a HTMLParagraphElement so that later we can get its clientWidth
@@ -31,15 +34,8 @@ export class NewsTickerComponent implements AfterViewInit, OnInit {
 
   constructor(
     private curComponent: ElementRef<HTMLElement>, // NewsTickerComponent itself
-    private cdr: ChangeDetectorRef // it'll be used within `ngAfterViewInit`
+    private cdr: ChangeDetectorRef, // it'll be used within `ngAfterViewInit`
   ) { }
-  
-  ngOnInit() {
-    // set css custom properties directly, I don't think this breaks anything
-    // within Angular runtime as it just alters styles.
-    this.curComponent.nativeElement.style.setProperty('--gap-multiplier', this.gapInRem.toString());
-    this.curComponent.nativeElement.style.setProperty('--animation-duration-multiplier', this.animationDurInMs.toString());
-  }
 
   ngAfterViewInit(): void {
     // right now, the HTMLParagraphElement is already present on DOM (thus, has height and width)
