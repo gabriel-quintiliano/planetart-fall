@@ -1,0 +1,32 @@
+:host {
+  --gap-multiplier: 2;
+  --gap: calc( 1rem * var(--gap-multiplier));
+  --animation-duration-multiplier: 2000;
+  --duration: calc(1ms * var(--animation-duration-multiplier));
+  
+  overflow: hidden;
+  display: grid;
+  align-content: center;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  gap: var(--gap);
+}
+
+.text {
+  translate: -100% 0;
+  animation-name: go-forward;
+  animation-duration: var(--duration);
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-delay: 0.1s;
+}
+
+@keyframes go-forward {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(100% + var(--gap)));
+  }
+}

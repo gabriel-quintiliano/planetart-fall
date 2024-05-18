@@ -9,6 +9,7 @@ import { HomeComponent } from './components/home/home.component';
 import { HistoryComponent } from './components/history/history.component';
 import { DownloadComponent } from './components/download/download.component';
 import { RepeatDirective } from './directives/repeat.directive';
+import { NewsTickerComponent } from './components/news-ticker/news-ticker.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { RepeatDirective } from './directives/repeat.directive';
     HomeComponent,
     HistoryComponent,
     DownloadComponent,
-    RepeatDirective
+    RepeatDirective,
+    NewsTickerComponent
   ],
   imports: [
     BrowserModule,
