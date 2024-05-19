@@ -16,3 +16,26 @@ body {
   background-image: url('../../assets/starship-bg-1920.png');
   background-size: cover;
 }
+
+a,
+a:link,
+a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+input {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+img {
+  max-width: 100%;        // so the image its, at max, as big as its parent container
+  height: auto;           // just to make sure the image keeps its aspect-ratio
+  vertical-align: middle; // to get rid of that blank space bellow <img>
+  font-style: italic;     // to differentiate the "alt" text in case the image can't be loaded
+}
