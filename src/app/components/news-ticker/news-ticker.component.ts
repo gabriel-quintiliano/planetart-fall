@@ -38,11 +38,17 @@ export class NewsTickerComponent implements AfterViewInit {
   ) { }
 
   ngAfterViewInit(): void {
-    // right now, the HTMLParagraphElement is already present on DOM (thus, has height and width)
-    this.count = this.calcNewsTextCount();
-    // as this.count had a value in the beginning of initialization and has now changed this
-    // value before the end of initialization, it's important that we tell that to Angular.
-    this.cdr.detectChanges();
+    /* It's really important to wait until all fonts are downloaded from Google Fonts,
+     * otherwise Angular might calculate the actual clientWidth of the <p> element
+     * initially rendered with one of the fallback fonts (i.e. a different clientWidth)
+     * This problem might happen in low speed connections */
+    document.fonts.ready.then(() => {
+      // right now, the HTMLParagraphElement is already present on DOM (thus, has height and width)
+      this.count = this.calcNewsTextCount();
+      // as this.count had a value in the beginning of initialization and has now changed this
+      // value before the end of initialization, it's important that we tell that to Angular.
+      this.cdr.detectChanges();
+    })
   }
 
   calcNewsTextCount(): number {
@@ -56,6 +62,11 @@ export class NewsTickerComponent implements AfterViewInit {
     // that if it appears on the end of the wrapper; divide that value for
     // the total width of the added elem (elem + gap); and finally, add 1
     // to account for the translate(-100%, 0) so no void or flicker is shown
+    console.log("curCompClientWidth = ", curCompClientWidth);
+    console.log("parElemClientWidth = ", parElemClientWidth);
+    console.log("(curCompClientWidth - gap) / (parElemClientWidth + gap) = ", (curCompClientWidth - gap) / (parElemClientWidth + gap));
+    console.log("Math.ceil((curCompClientWidth - gap) / (parElemClientWidth + gap)) = ", Math.ceil((curCompClientWidth - gap) / (parElemClientWidth + gap)));
+    console.log("Math.ceil((curCompClientWidth - gap) / (parElemClientWidth + gap)) + 1 = ", Math.ceil((curCompClientWidth - gap) / (parElemClientWidth + gap)) + 1)
     return Math.ceil((curCompClientWidth - gap) / (parElemClientWidth + gap)) + 1;
   }
 }
