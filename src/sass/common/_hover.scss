@@ -10,8 +10,10 @@
   position: relative;
 
   &::after {
+    --_extra-width: .3rem;
+
     content: "";
-    width: 100%;
+    width: calc(100% + var(--_extra-width) * 2);
     height: .2rem;
     display: block;
     margin: 0 auto;
@@ -19,12 +21,34 @@
     border-radius: 200px;
 
     position: absolute;
-    top: 100%;
+    top: calc(100% + .2rem);
+    left: calc(-1 * var(--_extra-width));
     transform: scaleX(0);
     transition: transform 200ms;
   }
 
   &:hover::after {
     transform: scaleX(1);
+  }
+}
+
+.underline {
+  position: relative;
+
+  &::after {
+    --_extra-width: .3rem;
+
+    content: "";
+    width: calc(100% + var(--_extra-width) * 2);
+    height: .2rem;
+    display: block;
+    margin: 0 auto;
+    background-color: var(--color-primary-dark);
+    border-radius: 200px;
+
+    position: absolute;
+    top: calc(100% + .2rem);
+    left: calc(-1 * var(--_extra-width));
+    transform: scale(1);
   }
 }

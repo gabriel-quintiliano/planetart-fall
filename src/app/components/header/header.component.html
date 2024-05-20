@@ -1,1 +1,31 @@
-<p>header works!</p>
+<div class="header">
+  <div class="header__main-content">
+    <a routerLink="/">
+      <img class="header__logo" src="../../../assets/logo.png" i18n-alt alt="Planetary Fall logo">
+    </a>
+    <nav>
+      <ul class="header__nav">
+        <li class="header__nav-item">
+          <a class="pressable underline-on-hover"
+            routerLink="/"
+            routerLinkActive="underline"
+            [routerLinkActiveOptions]="{ exact: true }"
+            i18n>Início</a>
+        </li>
+        <li class="header__nav-item">
+          <a class="pressable underline-on-hover"
+            [routerLink]="['/', env.routePath.history]"
+            routerLinkActive="underline"
+            i18n>História</a>
+        </li>
+      </ul>
+    </nav>
+    <a class="pressable btn header__btn" [routerLink]="['/', env.routePath.download]" i18n>Download</a>
+  </div>
+  <app-news-ticker
+    class="header__news-ticker"
+    newsText="new version 1.43"
+    animationDuration="2000ms"
+    gap="2rem">
+  </app-news-ticker>
+</div>

@@ -1,3 +1,59 @@
 :host {
   display: block;
 }
+
+.header {
+  
+  &__main-content {
+    padding: 2rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-family: var(--secondary-font);
+    line-height: 1;
+
+    position: relative; // anchor for &__nav
+  }
+
+  // still no need to use this selector
+  // &__logo {
+  //
+  // }
+
+  &__nav {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    gap: 6rem;
+  }
+  
+  &__nav-item {
+    & > a {
+      display: inline-block; // so translateX() applies
+      transition: transform 200ms;
+    }
+
+    &:hover > a {
+      transform: translateY(-2px);
+    }
+  }
+
+  &__btn {
+    font-family: 'open sans';
+    font-size: 2rem;
+    text-transform: uppercase;
+    padding: 1rem 1.8rem;
+    border-radius: var(--border-radius-md);
+    background-color: var(--color-secondary-light);
+  }
+  
+  &__news-ticker {
+    background-color: var(--color-secondary-dark);
+    padding: .5rem;
+    border-radius: var(--border-radius-md);
+  }
+}
