@@ -1,0 +1,9 @@
+/* only works for elements that support :active, which are <a>, <button>
+ * interactive elements (e.g. <label>, <input>) and block elements general */
+.pressable {
+  transition: transform 200ms;
+
+  &:active {
+    transform: translateY(2px);
+  }
+}

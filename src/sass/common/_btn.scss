@@ -1,0 +1,11 @@
+.btn {
+  // properties targeting <button>
+  border: none;
+  cursor: pointer;
+
+  // properties targeting <a> used as button
+  display: inline-block;
+
+  // general
+  padding: 1.5rem .8rem;
+}

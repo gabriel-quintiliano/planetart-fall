@@ -15,6 +15,16 @@ body {
   
   background-image: url('../../assets/starship-bg-1920.png');
   background-size: cover;
+
+  /* I found styles bellow to be important to create a better UX (mainly for low
+   * speed connections), by setting this fade-in animation and delaying only 300ms,
+   * we can avoid that the user see 'flash of invisible text' or just the eventual
+   * abrupt change from a fallback font to the one which is downloaded from Google
+   * Fonts or another service. Also, secondarily, it's also a nice, simple and
+   * modern effect, and DON'T affect your background-image, so don't worry, the
+   * user won't be staring at a blank screen */
+  opacity: 0;
+  animation: fade-in 800ms 300ms forwards;
 }
 
 a,
@@ -26,6 +36,14 @@ a:visited {
 
 li {
   list-style: none;
+}
+
+nav {
+  /* In this project, most - if not all - of the navbar styling will be applied
+   * directly to the <ul> element, so this is to make <nav> define its width
+   * according to the content within and don't (possibly) ruin the layout when
+   * <ul> is absolutely positioned */
+  display: inline-block;
 }
 
 input {
