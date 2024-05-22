@@ -62,11 +62,6 @@ export class NewsTickerComponent implements AfterViewInit {
     // that if it appears on the end of the wrapper; divide that value for
     // the total width of the added elem (elem + gap); and finally, add 1
     // to account for the translate(-100%, 0) so no void or flicker is shown
-    console.log("curCompClientWidth = ", curCompClientWidth);
-    console.log("parElemClientWidth = ", parElemClientWidth);
-    console.log("(curCompClientWidth - gap) / (parElemClientWidth + gap) = ", (curCompClientWidth - gap) / (parElemClientWidth + gap));
-    console.log("Math.ceil((curCompClientWidth - gap) / (parElemClientWidth + gap)) = ", Math.ceil((curCompClientWidth - gap) / (parElemClientWidth + gap)));
-    console.log("Math.ceil((curCompClientWidth - gap) / (parElemClientWidth + gap)) + 1 = ", Math.ceil((curCompClientWidth - gap) / (parElemClientWidth + gap)) + 1)
     return Math.ceil((curCompClientWidth - gap) / (parElemClientWidth + gap)) + 1;
   }
 }
