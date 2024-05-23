@@ -6,7 +6,10 @@
     "planetary-fall": {
       "projectType": "application",
       "i18n": {
-        "sourceLocale": "pt"
+        "sourceLocale": {
+          "code": "pt",
+          "baseHref": ""
+        }
       },
       "schematics": {
         "@schematics/angular:component": {
