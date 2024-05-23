@@ -1,4 +1,5 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EmbeddedViewRef, Host, HostBinding, HostListener, Input, OnInit, Renderer2, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-news-ticker',
@@ -16,25 +17,14 @@ export class NewsTickerComponent implements AfterViewInit {
   // so there is a HTMLParagraphElement so that later we can get its clientWidth
   protected count: number = 1;
   @ViewChild('paragraph') private parElem!: ElementRef<HTMLParagraphElement>;
-
-  // used in the callback bellow to prevent it from running to many times unnecessarily
-  private activeSetTimeout?: ReturnType<typeof setTimeout>;
   
   // adds this callback to window resize event
-  @HostListener('window:resize') handleResize() {
-    // there is any timeout, we'll clear it
-    clearTimeout(this.activeSetTimeout);
-    
-    // if the resizing stops, this timeout finally will not be cleared and
-    // count will be recalculated after 200ms
-    this.activeSetTimeout = setTimeout(() => {
-      this.count = this.calcNewsTextCount();
-    }, 200);
-  }
+  @HostListener('window:resize') handleResize = this.utils.debounce(this.calcNewsTextCount, 200, this);
 
   constructor(
     private curComponent: ElementRef<HTMLElement>, // NewsTickerComponent itself
     private cdr: ChangeDetectorRef, // it'll be used within `ngAfterViewInit`
+    private utils: UtilsService
   ) { }
 
   ngAfterViewInit(): void {
