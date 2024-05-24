@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EmbeddedViewRef, Host, HostBinding, HostListener, Input, OnInit, Renderer2, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostBinding, HostListener, Input, ViewChild } from '@angular/core';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -11,11 +11,12 @@ export class NewsTickerComponent implements AfterViewInit {
    * css custom properties via @HostBinding and their value can also be set from
    * "outside" the component via @Input. These two also have default values (important) */
   @Input() @HostBinding('style.--_gap') gap: string = '2rem';
-  @Input() @HostBinding('style.--_animation-duration') animationDuration: string = '2000ms';
+  @Input() @HostBinding('style.--_animation-duration') animationDuration: string = '2s';
   @Input({ required: true }) newsText!: string;
-  
-  // so there is a HTMLParagraphElement so that later we can get its clientWidth
-  protected count: number = 1;
+
+  /* so there is a HTMLParagraphElement so that later we can get its clientWidth, the
+   * value of this prop also sets the css custom var --_word-count */
+  @HostBinding('style.--_word-count') protected count: number = 1;
   @ViewChild('paragraph') private parElem!: ElementRef<HTMLParagraphElement>;
   
   // adds this callback to window resize event
