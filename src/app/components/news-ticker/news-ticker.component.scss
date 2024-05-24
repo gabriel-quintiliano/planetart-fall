@@ -1,22 +1,28 @@
 :host {
-  --_gap: 2rem; // this prop will be reset by TS
-  --_animation-duration: 2000ms; // this prop will be reset by TS
-  
+  --_gap: 2rem; // this prop will be reset by new-ticker.component.ts
+  --_animation-duration: 2s; // this prop will be reset by new-ticker.component.ts
+  --_word-count: 1; // this prop will be reset by new-ticker.component.ts
+
   overflow: hidden;
   display: grid;
-  align-content: center;
   grid-auto-flow: column;
   grid-auto-columns: max-content;
   gap: var(--_gap);
 }
 
-.text {
-  translate: -100% 0;
+.wrapper {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  gap: var(--_gap);
+
   animation-name: go-forward;
-  animation-duration: var(--_animation-duration);
+  animation-duration: calc(var(--_animation-duration) * var(--_word-count));
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   animation-delay: 0.1s;
+
+  translate: -100% 0;
 }
 
 @keyframes go-forward {
@@ -28,3 +34,11 @@
     transform: translateX(calc(100% + var(--_gap)));
   }
 }
+
+/* EXPLANATION OF CUSTOM PROPERTIES:
+ *
+ * --_word-count is important because as it is the .wrapper div (which holds within
+ * all <p> elements) that's being translate, if this .wrapper becomes smaller, but
+ * the same animation-duration will actually make it translate slower too, we actually
+ * set animation-duration as if it was being applied to .text (the <p> element) but
+ * then multiply it by word-count to account for all <p> elements that .wrapper holds. */
